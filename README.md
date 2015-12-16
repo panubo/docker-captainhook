@@ -1,4 +1,4 @@
-# Captain Hook
+# Captainhook
 
 A tweaked Dockerfile for [Captainhook](https://github.com/bketelsen/captainhook).
 
