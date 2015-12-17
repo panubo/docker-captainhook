@@ -10,6 +10,10 @@ RUN git clone https://github.com/bketelsen/captainhook.git /go/src/app && rm -rf
    mkdir /config && \
    useradd --home-dir /go/src/app captainhook
 
+COPY entry.sh /
+
 USER captainhook
 
-CMD app -echo -listen-addr 0.0.0.0:8080 -configdir /config
+ENTRYPOINT ["/entry.sh"]
+
+CMD ["/go/bin/app", "-echo", "-listen-addr", "0.0.0.0:8080", "-configdir", "/config"]
