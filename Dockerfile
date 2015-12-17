@@ -8,11 +8,11 @@ RUN git clone https://github.com/bketelsen/captainhook.git /go/src/app && rm -rf
    go-wrapper download && \
    go-wrapper install && \
    mkdir /config && \
-   useradd --home-dir /go/src/app captainhook
+   useradd --home-dir /go/src/app captain
 
 COPY entry.sh /
 
-USER captainhook
+USER captain
 
 ENTRYPOINT ["/entry.sh"]
 
