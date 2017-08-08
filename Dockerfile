@@ -1,15 +1,22 @@
-FROM golang:1.4.3
+FROM golang:1.4.3 as build
+
+RUN git clone https://github.com/bketelsen/captainhook.git /go/src/app && \
+    cd /go/src/app && \
+    go-wrapper download && \
+    CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o app .
+
+FROM alpine:latest
 
 EXPOSE 8080
 
-WORKDIR /go/src/app
+RUN apk --update add bash curl git wget && \
+    mkdir -p /go/src/app/ && \
+    addgroup -g 1000 captain && \
+    adduser -D -u 1000 -G captain -h /go/src/app captain && \
+    mkdir /config && \
+    rm -rf /var/cache/apk/*
 
-RUN git clone https://github.com/bketelsen/captainhook.git /go/src/app && rm -rf .git && \ 
-   go-wrapper download && \
-   go-wrapper install && \
-   mkdir /config && \
-   useradd --home-dir /go/src/app captain
-
+COPY --from=build /go/src/app/app /go/bin/app
 COPY entry.sh /
 
 USER captain
