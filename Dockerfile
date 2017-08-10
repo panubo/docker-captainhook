@@ -9,7 +9,7 @@ FROM alpine:latest
 
 EXPOSE 8080
 
-RUN apk --update add bash curl git wget && \
+RUN apk --update add bash curl git wget openssh-client && \
     mkdir -p /go/src/app/ && \
     addgroup -g 1000 captain && \
     adduser -D -u 1000 -G captain -h /go/src/app captain && \
