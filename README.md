@@ -1,6 +1,6 @@
 # Captainhook
 
-An optimised Dockerfile for [Captainhook](https://github.com/bketelsen/captainhook).
+An optimised Docker image for [Captainhook](https://github.com/bketelsen/captainhook).
 
 ## Configuration
 
